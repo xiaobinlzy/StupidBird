@@ -7,87 +7,113 @@
 //
 
 #include "GameScene.h"
+#include "AppDelegate.h"
 
+bool GameScene::init(const char* bgPath) {
+	if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 0))) {
+		return false;
+	}
+	CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFrames();
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
+			"flappy_packer.plist");
+	mIsGameOver = false;
+	mBackgroundLayer = BackgroundLayer::create();
+	this->addChild(mBackgroundLayer, -1);
+	CCSprite *sprBg1 = CCSprite::create(bgPath);
+	sprBg1->setAnchorPoint(ccp(0, 0));
+	sprBg1->setPosition(ccp(0, 0));
+	CCSize bgSize = sprBg1->getContentSize();
+	sprBg1->setScale(640.0f / bgSize.width);
+	sprBg1->setScaleY(960.0f / bgSize.height);
+	this->addChild(sprBg1, -2);
+	mBird = Bird::create();
+	mBird->setPosition(ccp(150, 600));
+	this->addChild(mBird, 0);
 
-bool GameScene::init()
-{
-    if (!CCLayer::init()) {
-        return false;
-    }
-    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFrames();
-    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("flappy_packer.plist");
-    mIsGameOver = false;
-    mBackgroundLayer = BackgroundLayer::create();
-    this->addChild(mBackgroundLayer, -1);
-    
-    CCSprite *sprBg1 = CCSprite::create("bg.png");
-    sprBg1->setAnchorPoint(ccp(0, 0));
-    sprBg1->setPosition(ccp(0, 0));
-    this->addChild(sprBg1, -2);
-    mBird = Bird::create();
-    mBird->setPosition(ccp(150, 600));
-    this->addChild(mBird, 0);
-    
-    return true;
+	return true;
 }
 
-GameScene::~GameScene()
-{
-    
+GameScene * GameScene::create(const char *bgPath) {
+	GameScene * scene = new GameScene();
+	if (scene && scene->init(bgPath)) {
+		scene->autorelease();
+		return scene;
+	} else {
+		delete scene;
+		scene = NULL;
+		return scene;
+	}
 }
 
-CCScene* GameScene::scene()
-{
-    CCScene *scene = CCScene::create();
-    GameScene *layer = GameScene::create();
-    scene->addChild(layer);
-    return scene;
+GameScene::~GameScene() {
+
 }
 
-void GameScene::update(float dt)
-{
-    CCRect birdBounds = mBird->boundingBox();
-    if (birdBounds.origin.y <= mBackgroundLayer->getGroundHeight()) {
-        mIsGameOver = true;
-    }
-    birdBounds.origin.y += 30;
-    birdBounds.size.height -= 35;
-    birdBounds.size.width -= 20;
-    birdBounds.origin.x += 10;
-    CCArray *holdbacks = mBackgroundLayer->getHoldbacks();
-    for (int i = 0; i < holdbacks->count(); i++) {
-        CCNode *holdback = (CCNode*)(holdbacks->objectAtIndex(i));
-        CCRect holdbackRect = holdback->boundingBox();
-        holdbackRect.origin.x += mBackgroundLayer->getPositionX() + 15.0f;
-        holdbackRect.size.width -= 30;
-        if (birdBounds.intersectsRect(holdbackRect)) {
-            mIsGameOver = true;
-            break;
-        }
-    }
-    if (mIsGameOver) {
-        mBird->stopAllActions();
-        mBackgroundLayer->stopAllActions();
-        this->unscheduleUpdate();
-    }
+CCScene* GameScene::scene(const char *bgPath) {
+	CCScene *scene = CCScene::create();
+	GameScene *layer = GameScene::create(bgPath);
+	scene->addChild(layer);
+	return scene;
 }
 
-void GameScene::onEnterTransitionDidFinish()
-{
-    CCLayer::onEnterTransitionDidFinish();
-    this->setTouchEnabled(true);
-    this->setTouchMode(kCCTouchesOneByOne);
-    mBackgroundLayer->startMoveToBack();
-    mBird->startFallDown();
-    this->scheduleUpdate();
+void GameScene::update(float dt) {
+	CCRect birdBounds = mBird->boundingBox();
+	if (!mIsDead && !mIsGameOver) {
+		if (birdBounds.origin.y <= mBackgroundLayer->getGroundHeight()) {
+			mIsDead = true;
+		} else {
+			birdBounds.origin.y += 30;
+			birdBounds.size.height -= 35;
+			birdBounds.size.width -= 20;
+			birdBounds.origin.x += 10;
+			CCArray *holdbacks = mBackgroundLayer->getHoldbacks();
+			for (int i = 0; i < holdbacks->count(); i++) {
+				CCNode *holdback = (CCNode*) (holdbacks->objectAtIndex(i));
+				CCRect holdbackRect = holdback->boundingBox();
+				holdbackRect.origin.x += mBackgroundLayer->getPositionX()
+						+ 15.0f;
+				holdbackRect.size.width -= 30;
+				if (birdBounds.intersectsRect(holdbackRect)) {
+					mIsDead = true;
+					break;
+				}
+			}
+		}
+		if (mIsDead) {
+			mBird->fallDown();
+
+			mBackgroundLayer->stopAllActions();
+		}
+	} else if (mIsDead) {
+		if (birdBounds.origin.y <= mBackgroundLayer->getGroundHeight()) {
+			mBird->stopAllActions();
+			mIsGameOver = true;
+		}
+	}
 }
 
-bool GameScene::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent)
-{
-    if (mIsGameOver) {
-        CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(1, GameScene::scene()));
-        return true;
-    }
-    mBird->fly();
-    return true;
+void GameScene::onEnterTransitionDidFinish() {
+	CCLayer::onEnterTransitionDidFinish();
+	this->setTouchEnabled(true);
+	this->setTouchMode(kCCTouchesOneByOne);
+	mBackgroundLayer->startMoveToBack();
+	mBird->startFallDown();
+	this->scheduleUpdate();
+}
+
+bool GameScene::ccTouchBegan(cocos2d::CCTouch *pTouch,
+		cocos2d::CCEvent *pEvent) {
+	if (!mIsDead) {
+		mBird->fly();
+	}
+	return true;
+}
+
+void GameScene::ccTouchEnded(cocos2d::CCTouch *pTouch,
+		cocos2d::CCEvent *pEvent) {
+	if (mIsGameOver) {
+		CCDirector::sharedDirector()->popScene();
+		((AppDelegate *) CCApplication::sharedApplication())->destroy();
+	}
+
 }

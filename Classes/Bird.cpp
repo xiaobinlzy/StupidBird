@@ -61,6 +61,15 @@ void Bird::cleanup()
     CCSprite::cleanup();
 }
 
+void Bird::fallDown()
+{
+    this->stopAction(mActionFly);
+    if (mCurrentAction == mActionFalldown) {
+        return;
+    }
+    this->startFallDown();
+}
+
 void Bird::fly()
 {
     if (mCurrentAction) {

@@ -15,19 +15,21 @@
 
 using namespace cocos2d;
 
-class GameScene : public CCLayer{
+class GameScene : public CCLayerColor{
 private:
     BackgroundLayer *mBackgroundLayer;
     Bird *mBird;
     bool mIsGameOver;
+    bool mIsDead;
 public:
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
     virtual ~GameScene();
-    static CCScene* scene();
-    virtual bool init();
+    static CCScene* scene(const char *bgPath);
+    virtual bool init(const char * bgPath);
     virtual void onEnterTransitionDidFinish();
     virtual void update(float dt);
-    CREATE_FUNC(GameScene);
+    static GameScene * create(const char* bgPath);
 };
 
 #endif /* defined(__StupidBird__GameScene__) */

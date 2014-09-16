@@ -2,14 +2,19 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "CCEGLView.h"
 
 /**
 @brief    The cocos2d Application.
 
 The reason for implement as private inheritance is to hide some interface call by CCDirector.
 */
+USING_NS_CC;
 class  AppDelegate : private cocos2d::CCApplication
 {
+protected:
+	CCEGLView* pEGLView;
+
 public:
     AppDelegate();
     virtual ~AppDelegate();
@@ -20,7 +25,7 @@ public:
     @return false   Initialize failed, app terminate.
     */
     virtual bool applicationDidFinishLaunching();
-
+    
     /**
     @brief  The function be called when the application enter background
     @param  the pointer of the application
@@ -32,6 +37,8 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
+    
+    virtual void destroy();
 };
 
 #endif // _APP_DELEGATE_H_

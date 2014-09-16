@@ -27,6 +27,7 @@ public:
     virtual ~Bird();
     virtual void fly();
     virtual void startFallDown();
+    virtual void fallDown();
     virtual void cleanup();
     CREATE_FUNC(Bird);
 };
