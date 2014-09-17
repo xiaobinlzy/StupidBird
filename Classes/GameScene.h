@@ -22,8 +22,8 @@ private:
     bool mIsGameOver;
     bool mIsDead;
 public:
-    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-    virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
+    virtual bool onTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void onTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
     virtual ~GameScene();
     static CCScene* scene(const char *bgPath);
     virtual bool init(const char * bgPath);

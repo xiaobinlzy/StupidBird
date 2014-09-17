@@ -37,7 +37,7 @@ bool Bird::init()
     mActionFalldown->retain();
     
 
-    mActionFlyUp = CCSequence::CCSequence::create(CCEaseOut::create(CCMoveBy::create(0.3, ccp(0, 100)), 2.0f), CCCallFunc::create(this, callfunc_selector(Bird::startFallDown)), NULL);
+    mActionFlyUp = CCSequence::create(CCEaseOut::create(CCMoveBy::create(0.3, ccp(0, 100)), 2.0f), CCCallFunc::create(this, callfunc_selector(Bird::startFallDown)), NULL);
     mActionFlyUp->retain();
     return true;
 }

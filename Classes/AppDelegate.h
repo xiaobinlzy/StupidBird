@@ -2,7 +2,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
-#include "CCEGLView.h"
+#include "CCGLView.h"
 
 /**
 @brief    The cocos2d Application.
@@ -41,6 +41,8 @@ public:
     virtual void destroy();
 
     virtual void onGameStart();
+
+    virtual const char* getBackgroundPath() = 0;
 };
 
 #endif // _APP_DELEGATE_H_

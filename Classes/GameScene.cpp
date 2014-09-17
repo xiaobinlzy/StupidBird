@@ -103,7 +103,7 @@ void GameScene::onEnterTransitionDidFinish() {
 	((AppDelegate *)CCApplication::sharedApplication())->onGameStart();
 }
 
-bool GameScene::ccTouchBegan(cocos2d::CCTouch *pTouch,
+bool GameScene::onTouchBegan(cocos2d::CCTouch *pTouch,
 		cocos2d::CCEvent *pEvent) {
 	if (!mIsDead) {
 		mBird->fly();
@@ -111,8 +111,7 @@ bool GameScene::ccTouchBegan(cocos2d::CCTouch *pTouch,
 	return true;
 }
 
-void GameScene::ccTouchEnded(cocos2d::CCTouch *pTouch,
-		cocos2d::CCEvent *pEvent) {
+void GameScene::onTouchEnded(CCTouch *pTouch,CCEvent *pEvent) {
 	if (mIsGameOver) {
 		CCDirector::sharedDirector()->popScene();
 		((AppDelegate *) CCApplication::sharedApplication())->destroy();
