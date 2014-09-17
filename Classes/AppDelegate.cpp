@@ -45,3 +45,8 @@ void AppDelegate::applicationWillEnterForeground() {
 void AppDelegate::destroy() {
 	delete this;
 }
+
+void AppDelegate::onGameStart()
+{
+
+}

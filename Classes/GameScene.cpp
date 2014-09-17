@@ -10,7 +10,7 @@
 #include "AppDelegate.h"
 
 bool GameScene::init(const char* bgPath) {
-	if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 0))) {
+	if (!CCLayer::init()) {
 		return false;
 	}
 	CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFrames();
@@ -44,6 +44,7 @@ GameScene * GameScene::create(const char *bgPath) {
 		return scene;
 	}
 }
+
 
 GameScene::~GameScene() {
 
@@ -99,6 +100,7 @@ void GameScene::onEnterTransitionDidFinish() {
 	mBackgroundLayer->startMoveToBack();
 	mBird->startFallDown();
 	this->scheduleUpdate();
+	((AppDelegate *)CCApplication::sharedApplication())->onGameStart();
 }
 
 bool GameScene::ccTouchBegan(cocos2d::CCTouch *pTouch,

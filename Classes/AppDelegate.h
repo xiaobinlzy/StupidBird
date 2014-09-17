@@ -39,6 +39,8 @@ public:
     virtual void applicationWillEnterForeground();
     
     virtual void destroy();
+
+    virtual void onGameStart();
 };
 
 #endif // _APP_DELEGATE_H_
