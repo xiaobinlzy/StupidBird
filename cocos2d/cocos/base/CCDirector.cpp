@@ -167,7 +167,6 @@ bool Director::init(void)
 Director::~Director(void)
 {
     CCLOGINFO("deallocing Director: %p", this);
-
     CC_SAFE_RELEASE(_FPSLabel);
     CC_SAFE_RELEASE(_drawnVerticesLabel);
     CC_SAFE_RELEASE(_drawnBatchesLabel);

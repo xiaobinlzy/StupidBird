@@ -91,7 +91,6 @@ GLView::GLView()
 
 GLView::~GLView()
 {
-
 }
 
 bool GLView::initWithRect(const std::string& viewName, Rect rect, float frameZoomFactor)
@@ -113,6 +112,7 @@ bool GLView::isOpenGLReady()
 void GLView::end()
 {
 //    terminateProcessJNI();
+	delete this;
 }
 
 void GLView::swapBuffers()
