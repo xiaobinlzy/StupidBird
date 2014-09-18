@@ -7487,6 +7487,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7526,6 +7527,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};
@@ -7535,6 +7537,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7544,6 +7547,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};
@@ -7562,6 +7566,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external/curl/include/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7581,6 +7586,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external/curl/include/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};
@@ -7592,6 +7598,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../external/chipmunk/include/chipmunk/";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7604,6 +7611,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../external/chipmunk/include/chipmunk/";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};
@@ -7621,6 +7629,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7639,6 +7648,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};
@@ -7656,6 +7666,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Debug;
 		};
@@ -7674,6 +7685,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/ios";
+				VALID_ARCHS = "armv7s armv7 i386";
 			};
 			name = Release;
 		};

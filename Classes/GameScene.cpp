@@ -14,8 +14,7 @@ bool GameScene::init(const char* bgPath) {
 		return false;
 	}
 	CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFrames();
-	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(
-			"flappy_packer.plist");
+	CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("flappy_packer.plist");
 	mIsGameOver = false;
 	mBackgroundLayer = BackgroundLayer::create();
 	this->addChild(mBackgroundLayer, -1);
@@ -23,7 +22,7 @@ bool GameScene::init(const char* bgPath) {
 	sprBg1->setAnchorPoint(ccp(0, 0));
 	sprBg1->setPosition(ccp(0, 0));
 	CCSize bgSize = sprBg1->getContentSize();
-	sprBg1->setScale(640.0f / bgSize.width);
+	sprBg1->setScaleX(640.0f / bgSize.width);
 	sprBg1->setScaleY(960.0f / bgSize.height);
 	this->addChild(sprBg1, -2);
 	mBird = Bird::create();
